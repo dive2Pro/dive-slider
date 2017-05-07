@@ -1,0 +1,15 @@
+
+._slider_dot_container{
+    text-align: center;
+    width: 100%;
+    height:100%;
+}
+
+._slider_dot{
+    border:1px solid lightgray;
+    width: 20px;
+    height: 2px;
+    margin-right: 5px;
+    display: inline-block;
+    border-radius: 100%/50%;
+}

@@ -1,0 +1,38 @@
+.container{
+    margin:auto;
+    border:3px solid;
+    transform-style: preserve-3d;
+    background: rgba(6, 6, 6, 0.5);
+    overflow: hidden;
+    height: 400px;
+    perspective: 500px;
+    width:100%;
+}
+
+._slider_items{
+    position: relative;
+    height:90%;    pointer-events: none;
+
+}
+
+.div-image{
+    position: absolute;
+    transition:all 0.2s ease;
+    perspective-origin: bottom;
+
+}
+.div-mask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(6, 6, 6, 0.5);
+    pointer-events: none;
+}
+.image{
+    display: inline-block;
+    width:400px;
+    pointer-events: auto;
+
+}
+
+
