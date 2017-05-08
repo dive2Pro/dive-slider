@@ -1,8 +1,6 @@
 .container{
     margin:auto;
-    border:3px solid;
     transform-style: preserve-3d;
-    background: rgba(6, 6, 6, 0.5);
     overflow: hidden;
     height: 400px;
     perspective: 500px;
@@ -11,7 +9,8 @@
 
 ._slider_items{
     position: relative;
-    height:90%;    pointer-events: none;
+    height:90%;
+    pointer-events: none;
 
 }
 

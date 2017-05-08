@@ -6,7 +6,7 @@ import uglify from 'rollup-plugin-uglify'
 // import postcss from 'rollup-plugin-postcss';
 // import css from 'rollup-plugin-css-only'
 import scss from 'rollup-plugin-sass';
-export const prod=  {
+export default {
     entry: 'src/index',
     dest: 'lib/index.js',
     format: 'cjs',
@@ -42,14 +42,5 @@ export const prod=  {
         // output: {
         //     comments: false
         // },
-        // sourceMap: false
-        // })
-        // postcss({
-        //     extensions:['.scss'],
-        // }),
-        // css({
-        //     output:'bundle.scss'
-        // })
-
     ],
 }

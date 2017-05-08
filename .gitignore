@@ -4,3 +4,7 @@ node_modules/
 lib/
 pics/
 npm-debug.log
+dev/
+config/
+html/
+plugins/

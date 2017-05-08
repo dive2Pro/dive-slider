@@ -3,7 +3,6 @@ export default class SliderDots extends Component {
 
     render() {
         let {count, index} = this.props
-
         return (
             <div className="_slider_dot_container">
                 {

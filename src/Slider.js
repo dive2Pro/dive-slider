@@ -29,12 +29,16 @@ const map = function (n, start1, stop1, start2, stop2) {
 export default class Slider extends Component {
     arc
     tickCount = 0
-    count
+    count=0
 
     constructor(props) {
         super(props)
        this.init(props)
     }
+    componentWillReceiveProps(nextProps){
+        this.init(nextProps);
+    }
+
     init = (props)=>{
         const {srcs} = props
         const count = this.count = srcs.length
@@ -51,7 +55,8 @@ export default class Slider extends Component {
 
         duration: 1500,
         width: 500,
-        hasDots: true
+        hasDots: true,
+        height:400
     }
 
     static propTypes = {
@@ -59,6 +64,7 @@ export default class Slider extends Component {
         defaultImage: PropTypes.string,
         animType: PropTypes.oneOf(['fade']),
         width: PropTypes.number,
+        height: PropTypes.number,
         srcs: PropTypes.arrayOf(PropTypes.string).isRequired,
         hasDots: PropTypes.bool,
         handleImageClick: PropTypes.func.isRequired
@@ -66,7 +72,8 @@ export default class Slider extends Component {
 
     renderImages = () => {
         const {arcs, srcs} = this.state
-        const r = 500
+        const {width,height} = this.props
+        const r = width
         return srcs.map((src, index) => {
             let du = arcs[index];
             let z = Math.cos(du) * r - r
@@ -74,6 +81,7 @@ export default class Slider extends Component {
             let y = Math.tan(du) * r
             z = map(z, -1000, 0, -360, 0)
             const width = r + 100
+            console.log(width/1.8)
             /**
              * 需要Y轴的下半部分对齐,考虑Y轴:
              *         视差导致的角度
@@ -100,7 +108,7 @@ export default class Slider extends Component {
                         data-index={x.toFixed(0)}
                         className="image"
                         src={src}
-                        style={{width: style.width}}
+                        style={{width: style.width,height:height*0.9}}
                     />
                 </div>)
         })
@@ -127,10 +135,13 @@ export default class Slider extends Component {
     }
 
     nextTick(a) {
-
-        let index = this.tickCount += a > 0 ? -1 : 1;
+        if(this.count<1){
+            return;
+        }
+        let index = this.tickCount +=( a > 0 ? -1 : 1);
         let ic = index % this.count;
         this.tickCount = ic < 0 ? ic + this.count : +ic
+        console.log(this.tickCount,ic)
         this.setState(prev => {
             let newArcs = (prev.arcs.map(arc => {
                 return arc + a
@@ -145,9 +156,7 @@ export default class Slider extends Component {
         this.startNextTimeout()
 
     }
-    componentWillReceiveProps(nextProps){
-        this.init(nextProps);
-    }
+
     componentDidUpdate() {
         this.startNextTimeout()
     }
@@ -170,19 +179,23 @@ export default class Slider extends Component {
     }
 
     render() {
-        const {srcs} = this.state
-        const {hasDots} = this.props
+        const {hasDots,height} = this.props
         return (
             <section
-                className="container">
+                className="container"
+                style={{height}}
+            >
                 <div
                     onMouseDown={this.handleImageClick}
-                    className="_slider_items">
+                    className="_slider_items"
+                    style={{height:height*0.9}}
+                >
                     {
                         this.renderImages()
                     }
                 </div>
-                {hasDots && <SliderDots index={this.tickCount} count={srcs.length}/>
+                {
+                    hasDots && <SliderDots index={this.tickCount} count={this.count}/>
                 }
             </section>
         )
