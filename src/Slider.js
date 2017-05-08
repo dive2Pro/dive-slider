@@ -1,13 +1,10 @@
 /**
  * Created by hyc on 17-5-7.
  */
-import  {Component,PropTypes} from 'react'
+import React, {Component,PropTypes} from 'react'
 // const PropTypes  = React.PropTypes
 import  SliderDots  from './SliderDots'
-
-require( './main.css')
-
-
+import './scss/index.scss'
 
 const anims = {
 
@@ -29,13 +26,16 @@ const map = function (n, start1, stop1, start2, stop2) {
  *            todo 可指定图片切换效果
  */
 
-class Slider extends Component {
+export default class Slider extends Component {
     arc
     tickCount = 0
     count
 
     constructor(props) {
         super(props)
+       this.init(props)
+    }
+    init = (props)=>{
         const {srcs} = props
         const count = this.count = srcs.length
         const arc = this.arc = 2 * Math.PI / count
@@ -47,7 +47,6 @@ class Slider extends Component {
             srcs
         })
     }
-
     static defaultProps = {
 
         duration: 1500,
@@ -146,9 +145,11 @@ class Slider extends Component {
         this.startNextTimeout()
 
     }
-
+    componentWillReceiveProps(nextProps){
+        this.init(nextProps);
+    }
     componentDidUpdate() {
-        // this.startNextTimeout()
+        this.startNextTimeout()
     }
 
     startNextTimeout() {
@@ -187,5 +188,3 @@ class Slider extends Component {
         )
     }
 }
-
-export default Slider

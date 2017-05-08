@@ -1025,6 +1025,10 @@ detect-indent@^4.0.0:
   dependencies:
     repeating "^2.0.0"
 
+dive-slider@^0.0.2:
+  version "0.0.2"
+  resolved "http://registry.npm.taobao.org/dive-slider/download/dive-slider-0.0.2.tgz#f5490712bb787ab52b119976a195322801694185"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "http://registry.npm.taobao.org/ecc-jsbn/download/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"

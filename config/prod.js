@@ -3,13 +3,21 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import replace  from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify'
-
-export default {
-    entry: './src/index',
+// import postcss from 'rollup-plugin-postcss';
+// import css from 'rollup-plugin-css-only'
+import scss from 'rollup-plugin-sass';
+export const prod=  {
+    entry: 'src/index',
     dest: 'lib/index.js',
     format: 'cjs',
-    sourceMap:true, external: [ 'react' ],
+    moduleName:'slider',
+    sourceMap:true,
+    external: [ 'react','node-sass' ],
     plugins: [
+
+        scss({
+            output:'./lib/slider.css',
+        }),
         resolve(),
         babel({
             exclude: 'node_modules/**'
@@ -25,16 +33,23 @@ export default {
         }),
         replace({
             'process.env.NODE_ENV': JSON.stringify( 'production' )
-        }),
+        })
         // uglify({
-            // compress: {
-            //     screw_ie8: true,
-            //     warnings: false
-            // },
-            // output: {
-            //     comments: false
-            // },
-            // sourceMap: false
+        // compress: {
+        //     screw_ie8: true,
+        //     warnings: false
+        // },
+        // output: {
+        //     comments: false
+        // },
+        // sourceMap: false
         // })
+        // postcss({
+        //     extensions:['.scss'],
+        // }),
+        // css({
+        //     output:'bundle.scss'
+        // })
+
     ],
 }

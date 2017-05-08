@@ -1,5 +1,4 @@
-import   {Component} from 'react'
-require( './sliderdots.css')
+import  React, {Component} from 'react'
 export default class SliderDots extends Component {
 
     render() {
